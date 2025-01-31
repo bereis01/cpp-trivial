@@ -1,15 +1,11 @@
-#include <stdint.h>
-#include <stddef.h>
+#include <string>
+#include <sstream>
 
-bool FuzzMe(const uint8_t *Data, size_t DataSize) {
-  return DataSize >= 3 &&
-      Data[0] == 'F' &&
-      Data[1] == 'U' &&
-      Data[2] == 'Z' &&
-      Data[3] == 'Z';  // :‑<
-}
+#include "main.h"
 
-extern "C" int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size) {
-  FuzzMe(Data, Size);
-  return 0;
+extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size)
+{
+    wrong_vector_access(data, size);
+
+    return 0;
 }
