@@ -11,6 +11,7 @@ check: all
 # Fuzz targets.
 target_fuzzer: target_fuzzer.cpp main.a
 	${CXX} ${CXXFLAGS} $< main.a ${LIB_FUZZING_ENGINE} -o $@
+	zip -q -r target_fuzzer_seed_corpus.zip test_data
 
 # The library itself.
 main.a: main.cpp main.h
