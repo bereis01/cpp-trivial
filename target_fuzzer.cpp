@@ -109,12 +109,20 @@ pair<vector<vector<int>>, vector<vector<int>>> needleman_wunsch_iterativo(
 }
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size) {
-	// Transforma a entrada do Fuzzer em uma string
-	string data_as_str(reinterpret_cast<const char*>(Data), Size);
+    try
+    {
+        // Transforma a entrada do Fuzzer em uma string
+        string data_as_str(reinterpret_cast<const char*>(Data), Size);
 
-	size_t meio = Size / 2;
+        size_t meio = Size / 2;
 
-	// Quebra a string no meio. v = primeira metade e w = segunda metade
-	needleman_wunsch_iterativo(data_as_str.substr(0, meio), data_as_str.substr(meio));
+        // Quebra a string no meio. v = primeira metade e w = segunda metade
+        needleman_wunsch_iterativo(data_as_str.substr(0, meio), data_as_str.substr(meio));
+    }
+    catch(const std::exception& e)
+    {
+        return 0;
+    }
+    
 	return 0;
 }
